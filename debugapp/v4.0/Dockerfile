@@ -1,5 +1,5 @@
 # From the base image which is node and node-inspector together
-FROM nodejs-inspector:latest
+FROM nodejs-inspector:4.0
 
 # Install the required modules of the node application into tmp and copy
 # Best practice for docker is to install npm deps only when package.json changes
@@ -22,5 +22,5 @@ EXPOSE 8080
 
 ENTRYPOINT ["node-debug", "--web-host", "0.0.0.0", "--cli", "true"]
 
-# These are default parameters which can be overriden at run time
+# These are default parameters which can be overridden at run time
 CMD ["./index.js"]

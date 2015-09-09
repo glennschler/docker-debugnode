@@ -13,5 +13,5 @@ EXPOSE 8080
 
 ENTRYPOINT ["node-debug", "--web-host", "0.0.0.0", "--cli", "true"]
 
-# These are default parameters which can be overriden at run time
+# These are default parameters which can be overridden at run time
 CMD ["./index.js"]
