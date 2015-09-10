@@ -1,7 +1,7 @@
-### Create a set of docker images built with node-inspector to help debug a Node.js application using different versions of Node.js
-Create a modularized environment for debugging a Node.js application. Building a base image which is only Node.js plus an install of node-inspector, allows new application images to be built quickly. The same application is able to be debugged quickly against each version of Node.js without any change to the local environment.
+### Create a set of docker images built with node-inspector
+To debug local Node.js applications using different versions of Node.js, create a modularized docker environment. Building a base image which is only Node.js plus an install of node-inspector, allows new application images to be built quickly. The same application is able to be debugged quickly against each version of Node.js without any change to the local environment.
 
-1. Build new base images of the official Node.js image plus node-inspector
+1. Build new base images of the official Node.js images plus node-inspector
 
   * First download this repository into the root of the application. These are the Dockerfile configurations for building the images
 

@@ -2,7 +2,7 @@
 # node and node-inspector. Not intended to be an image holding application files
 FROM node:4.0
 
-RUN npm install -g node-inspector
+RUN npm install -g node-inspector --unsafe-perm
 
 # setup the workdir
 WORKDIR /opt/app/node
