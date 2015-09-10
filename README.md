@@ -35,17 +35,20 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   Build the node-inspector base image created earlier from Node.js version 4.x
   ```bash
-  docker build -t nodeapp-debug:4.0 --file=./docker-debugnode/debugapp/v4.0/Dockerfile .
+  docker build -t nodeapp-debug:4.0 \
+  --file=./docker-debugnode/debugapp/v4.0/Dockerfile .
   ```
 
   Build the base image created earlier from Node.js version 12.x
   ```bash
-  docker build -t nodeapp-debug:0.12 --file=./docker-debugnode/debugapp/v0.12.LTS/Dockerfile .
+  docker build -t nodeapp-debug:0.12 \
+  --file=./docker-debugnode/debugapp/v0.12.LTS/Dockerfile .
   ```
 
   Build the base image created earlier from Node.js version 10.x
   ```bash
-  docker build -t nodeapp-debug:0.10 --file=./docker-debugnode/debugapp/v0.10.LTS/Dockerfile .
+  docker build -t nodeapp-debug:0.10 \
+  --file=./docker-debugnode/debugapp/v0.10.LTS/Dockerfile .
   ```
 
 3. Next use the Run command to create a running container
@@ -58,7 +61,7 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   ```bash
   # 4.0
-  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4
+  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0
 
   # 0.12
   docker run --name nodeapp-v0.12 -p 8080:8080 nodeapp-debug:0.12
