@@ -6,7 +6,7 @@ To debug local Node.js applications using different versions of Node.js, create 
   * First download this repository into the root of the application. These are the Dockerfile configurations for building the images
 
   ```bash
-  git https://github.com/glennschler/docker-debugnode
+  git clone https://github.com/glennschler/docker-debugnode
 
   # This README.md
   ls ./docker-debugnode/README.md
@@ -53,12 +53,6 @@ To debug local Node.js applications using different versions of Node.js, create 
 
 3. Next use the Run command to create a running container
 
-  Before attempting to debug the container from the local host, the IP of the docker machine is needed
-  ```bash
-  # for example, get the ip address of the machine named 'docker-01'
-  docker-machine ip docker-01
-  ```
-
   ```bash
   # 4.0
   docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0
@@ -70,7 +64,43 @@ To debug local Node.js applications using different versions of Node.js, create 
   docker run --name nodeapp-v0.10 -p 8080:8080 nodeapp-debug:0.10
   ```
 
+  More examples of run command
+  ```bash
+  # override the image defaults to debug another js file in the image.
+  # Also with some arguments to the application
+  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0 \
+  ./test/test1.js arg1 arg2
+  ```
+
+  View the output
+  ```bash
+  $
+  Node Inspector is now available from http://127.0.0.1:8080/?ws=127.0.0.1:8080&port=5858
+  Debugging `./test/test1.js`
+
+  Debugger listening on port 5858
+  ```
+
 4. Start debugging from the local host machine
 
-  Navigate to the docker-machine IP. Use chrome or other blink development tools browser, such as Webstorm
-    *  http://192.168.1.99.102:8080/?port=5858
+  Before attempting to debug the container, get the IP of the running container
+  ```bash
+  # for example, get the ip address of the machine named 'docker-01'
+  docker-machine ip docker-01
+  ```
+
+  Navigate to the docker-machine IP. Use chrome or other blink development tools browser, such as Webstorm: ```http://192.168.1.99.102:8080/?port=5858```
+
+  Debug using the container with the same RUN parameters as before
+  ```bash
+  docker restart nodeapp-v4.0
+  ```
+
+  After debugging again, once the container has stopped, kill the container
+  ```bash
+  # list the containers, including the ones which have stopped
+  docker ps -l
+
+  # remove it
+  docker rm nodeapp-v4.0
+  ```
