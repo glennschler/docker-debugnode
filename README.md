@@ -100,6 +100,14 @@ To debug local Node.js applications using different versions of Node.js, create 
   Debug using the container with the same RUN parameters as before
   ```bash
   docker restart nodeapp-v4.0
+
+  # see container log files
+  docker logs nodeapp-v4.0
+  ```
+
+  Bash into the running container to work on files
+  ```bash
+  docker exec -i -t nodeapp-v4.0 bash
   ```
 
   After debugging again, once the container has stopped, kill the container
