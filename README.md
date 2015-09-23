@@ -64,20 +64,6 @@ To debug local Node.js applications using different versions of Node.js, create 
   docker run --name nodeapp-v0.10 -p 8080:8080 nodeapp-debug:0.10
   ```
 
-  More examples of run command
-  ```bash
-  # override the image defaults to debug another js file in the image.
-  # Also with some arguments to the application
-  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0 \
-  ./test/test1.js arg1 arg2
-
-  # Override the app src that is in the container
-  # Mount the src in local path using the -v flag
-  # Be careful, since this uses the local host node_modules, not the images
-  docker run --name nodeapp-v4.0 -p 8080:8080 -v ${PWD}:/opt/app/node \
-  nodeapp-debug:4.0 ./test/test2.js arg1 arg2 arg3
-  ```
-
   View the output
   ```bash
   $
@@ -117,4 +103,21 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   # remove it
   docker rm nodeapp-v4.0
+  ```
+
+  More examples of run command
+  ```bash
+  # override the image defaults to debug another js file in the image.
+  # Also with some arguments to the application
+  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0 \
+  ./test/test1.js arg1 arg2
+
+  # Override the app src that is in the container
+  # Mount the src in local path using the -v flag
+  # Be careful, since this uses the local host node_modules, not the images
+  docker run --name nodeapp-v4.0 -p 8080:8080 -v ${PWD}:/opt/app/node \
+  nodeapp-debug:4.0 ./test/test2.js arg1 arg2 arg3
+
+  # run the container with an environment variable set
+  docker run -e NODE_DEBUG=http --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0
   ```
