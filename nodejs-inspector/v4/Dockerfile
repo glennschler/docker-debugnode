@@ -1,6 +1,6 @@
 # do not get FROM :onbuild because, this is just a base image of
 # node and node-inspector. Not intended to be an image holding application files
-FROM node:4.0
+FROM node:4
 
 RUN npm install -g node-inspector
 

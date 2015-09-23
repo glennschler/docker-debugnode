@@ -16,7 +16,7 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   ```bash
   # The latest Node.js, now that io.js and Node.js are one again
-  docker build -t nodejs-inspector:4.0 ./docker-debugnode/nodejs-inspector/v4.0
+  docker build -t nodejs-inspector:4 ./docker-debugnode/nodejs-inspector/v4
 
   # The stable Node.js version 0.12
   docker build -t nodejs-inspector:0.12 ./docker-debugnode/nodejs-inspector/v0.12.LTS
@@ -35,8 +35,8 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   Build the node-inspector base image created earlier from Node.js version 4.x
   ```bash
-  docker build -t nodeapp-debug:4.0 \
-  --file=./docker-debugnode/debugapp/v4.0/Dockerfile .
+  docker build -t nodeapp-debug:4 \
+  --file=./docker-debugnode/debugapp/v4/Dockerfile .
   ```
 
   Build the base image created earlier from Node.js version 12.x
@@ -54,8 +54,8 @@ To debug local Node.js applications using different versions of Node.js, create 
 3. Next use the Run command to create a running container
 
   ```bash
-  # 4.0
-  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0
+  # 4
+  docker run --name nodeapp-v4 -p 8080:8080 nodeapp-debug:4
 
   # 0.12
   docker run --name nodeapp-v0.12 -p 8080:8080 nodeapp-debug:0.12
@@ -91,15 +91,15 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   Debug using the container with the same RUN parameters as before
   ```bash
-  docker restart nodeapp-v4.0
+  docker restart nodeapp-v4
 
   # see container log files
-  docker logs nodeapp-v4.0
+  docker logs nodeapp-v4
   ```
 
   Bash into the running container to work on files
   ```bash
-  docker exec -i -t nodeapp-v4.0 bash
+  docker exec -i -t nodeapp-v4 bash
   ```
 
   After debugging again, once the container has stopped, kill the container
@@ -108,22 +108,31 @@ To debug local Node.js applications using different versions of Node.js, create 
   docker ps -l
 
   # remove it
-  docker rm nodeapp-v4.0
+  docker rm nodeapp-v4
   ```
 
   More examples of run command
   ```bash
   # override the image defaults to debug another js file in the image.
   # Also with some arguments to the application
-  docker run --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0 \
+  docker run --name nodeapp-v4 -p 8080:8080 nodeapp-debug:4 \
   ./test/test1.js arg1 arg2
 
   # Override the app src that is in the container
   # Mount the src in local path using the -v flag
   # Be careful, since this uses the local host node_modules, not the images
-  docker run --name nodeapp-v4.0 -p 8080:8080 -v ${PWD}:/opt/app/node \
-  nodeapp-debug:4.0 ./test/test2.js arg1 arg2 arg3
+  docker run --name nodeapp-v4 -p 8080:8080 -v ${PWD}:/opt/app/node \
+  nodeapp-debug:4 ./test/test2.js arg1 arg2 arg3
 
   # run the container with an environment variable set
-  docker run -e NODE_DEBUG=http --name nodeapp-v4.0 -p 8080:8080 nodeapp-debug:4.0
+  docker run -e NODE_DEBUG=http --name nodeapp-v4 -p 8080:8080 nodeapp-debug:4
+  ```
+
+  Give NodeJs arguments to the process instead of only node-inspector arguments
+  ```bash
+  # Output the version of NodeJs without breakpoint debugging
+  docker run --name nodeapp-v4 nodejs-inspector:4 -b false --nodejs --version
+
+  # remove the named container
+  docker rm nodeapp-v4
   ```
