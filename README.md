@@ -83,6 +83,12 @@ To debug local Node.js applications using different versions of Node.js, create 
 
   Navigate to the docker-machine IP. Use chrome or other blink development tools browser, such as Webstorm: ```http://192.168.1.99.102:8080/?port=5858```
 
+  #### Debug!
+
+----
+
+#### Additional options for controlling docker containers
+
   Debug using the container with the same RUN parameters as before
   ```bash
   docker restart nodeapp-v4.0
