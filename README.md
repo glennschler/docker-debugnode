@@ -131,7 +131,7 @@ To debug local Node.js applications using different versions of Node.js, create 
   Give NodeJs arguments to the process instead of only node-inspector arguments
   ```bash
   # Output the version of NodeJs without breakpoint debugging
-  docker run --name nodeapp-v4 nodejs-inspector:4 -b false --nodejs --version
+  docker run --name nodeinspect-v4 nodejs-inspector:4 -b false --nodejs -v
 
   # remove the named container
   docker rm nodeapp-v4

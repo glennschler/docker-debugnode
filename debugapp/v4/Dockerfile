@@ -1,5 +1,5 @@
 # From the base image which is node and node-inspector together
-FROM nodejs-inspector:4.0
+FROM nodejs-inspector:4
 
 # Install the required modules of the node application into tmp and copy
 # Best practice for docker is to install npm deps only when package.json changes
