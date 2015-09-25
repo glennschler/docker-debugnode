@@ -1,5 +1,9 @@
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:4.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:4 'Get your own badge on imagelayers.io')  [nodejs-inspector/v4](./docker-debugnode/nodejs-inspector/v4)
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.12.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.12 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.12.LTS](./docker-debugnode/nodejs-inspector/v0.12.LTS)
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.10.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.10 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.10.LTS](./docker-debugnode/nodejs-inspector/v0.10.LTS)
+
 ### Create a set of docker images built with node-inspector
-To debug local Node.js applications using different versions of Node.js, create a modularized docker environment. Building a base image which is only Node.js plus an install of node-inspector, allows new application images to be built quickly. The same application is able to be debugged quickly against each version of Node.js without any change to the local environment.
+Debug local Node.js applications using different versions of node in a modularized docker environment. Build a base image of only the official docker hub Node.js release, plus an npm install of node-inspector. This allows new images to be built quickly which contain the application to be debugged without any change to the local environment.
 
 1. Build new base images (or pull from Dockerhub) of the official Node.js images plus node-inspector
 
@@ -12,34 +16,34 @@ To debug local Node.js applications using different versions of Node.js, create 
   ls ./docker-debugnode/README.md
   ```
 
-  * Now for each version of Node.js needed, build with the appropriate Dockerfile
+2. Now for each version of Node.js needed, build with the appropriate Dockerfile
 
   ```bash
-  # The latest Node.js, now that io.js and Node.js are one again
+  # BUILD The latest Node.js, now that io.js and Node.js are one again
   docker build -t nodejs-inspector:4 ./docker-debugnode/nodejs-inspector/v4
 
   # OR pull the image which is automatically built and hosted at DockerHub
-  #  Then rename to keep the image name simple as though it was built local
+  #  Then rename to keep the image name same as if it was built locally (above)
   docker pull glenschler/nodejs-inspector:4
   docker tag glenschler/nodejs-inspector:4 nodejs-inspector:4
   docker rmi glenschler/nodejs-inspector:4
   ```
 
   ```bash
-  # The stable Node.js version 0.12  
+  # BUILD The stable Node.js version 0.12
   docker build -t nodejs-inspector:0.12 ./docker-debugnode/nodejs-inspector/v0.12.LTS
 
-  # OR pull from DockerHub
+  # OR pull the hosted image from DockerHub
   docker pull glenschler/nodejs-inspector:0.12
   docker tag glenschler/nodejs-inspector:0.12 nodejs-inspector:0.12
   docker rmi glenschler/nodejs-inspector:0.12
   ```
 
   ```bash
-  # The stable Node.js version 0.10
+  # BUILD The stable Node.js version 0.10
   docker build -t nodejs-inspector:0.10 ./docker-debugnode/nodejs-inspector/v0.10.LTS
 
-  # OR pull from DockerHub
+  # OR pull the hosted image from DockerHub
   docker pull glenschler/nodejs-inspector:0.10
   docker tag glenschler/nodejs-inspector:0.10 nodejs-inspector:0.10
   docker rmi glenschler/nodejs-inspector:0.10
@@ -51,7 +55,7 @@ To debug local Node.js applications using different versions of Node.js, create 
     * Next the local application files are added into the image
     * If the image is built again, it is quick using the image cached layers
       * Only updates to package.json force ```npm install``` to run again
-      * If an application file is change it is copied into the image
+      * If an application file is change it is copied into the image next build without needing to wait for an npm install
 
   Build the node-inspector base image created earlier from Node.js version 4.x
   ```bash
