@@ -12,6 +12,9 @@ Debug local Node.js applications using different versions of node in a modulariz
   ```bash
   git clone https://github.com/glennschler/docker-debugnode
 
+  # copy this repos .dockerignore or create your own. Do not overwrite if exist
+  cp -n docker-debugnode/.dockerignore .
+
   # This README.md
   ls ./docker-debugnode/README.md
   ```
@@ -49,7 +52,7 @@ Debug local Node.js applications using different versions of node in a modulariz
   docker rmi glenschler/nodejs-inspector:0.10
   ```
 
-2. Build the next image based off the above node-inspector image
+2. Add node application files to a new image based off the above node-inspector image
     * Must have a package.json
     * Docker file instructs NPM to install all modular dependencies
     * Next the local application files are added into the image
