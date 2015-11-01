@@ -1,3 +1,4 @@
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:5.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:5 'Get your own badge on imagelayers.io')  [nodejs-inspector/v5](./docker-debugnode/nodejs-inspector/v5)
 * [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:4.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:4 'Get your own badge on imagelayers.io')  [nodejs-inspector/v4](./docker-debugnode/nodejs-inspector/v4)
 * [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.12.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.12 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.12.LTS](./docker-debugnode/nodejs-inspector/v0.12.LTS)
 * [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.10.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.10 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.10.LTS](./docker-debugnode/nodejs-inspector/v0.10.LTS)
@@ -7,13 +8,18 @@ Debug local Node.js applications using different versions of node in a modulariz
 
 1. Build new base images (or pull from Dockerhub) of the official Node.js images plus node-inspector
 
-  * First download this repository into the root of the application. These are the Dockerfile configurations for building the images
+  * First clone this repository to your local application directory. These are the Dockerfile configurations for building the images
 
   ```bash
+  cd ./yourapplication
+
   git clone https://github.com/glennschler/docker-debugnode
 
-  # copy this repos .dockerignore or create your own. Do not overwrite if exist
-  cp -n docker-debugnode/.dockerignore .
+  # verify
+  ls docker-debugnode
+
+  # Copy the cloned repos .dockerignore or create your own. Do not overwrite if exist
+  cp -n ./docker-debugnode/.dockerignore .
 
   # This README.md
   ls ./docker-debugnode/README.md
@@ -21,8 +27,20 @@ Debug local Node.js applications using different versions of node in a modulariz
 
 2. Now for each version of Node.js needed, build with the appropriate Dockerfile
 
+```bash
+# BUILD The Node.js with the latest features version 5.x
+# Until some dependencies are updated for node version 5.x node-inspector install requires the npm "--unsafe-perm" flag. This is set in this v5/Dockerfile
+docker build -t nodejs-inspector:5 ./docker-debugnode/nodejs-inspector/v5
+
+# OR pull the image which is automatically built and hosted at DockerHub
+#  Then rename to keep the image name same as if it was built locally (above)
+docker pull glenschler/nodejs-inspector:5
+docker tag glenschler/nodejs-inspector:4 nodejs-inspector:5
+docker rmi glenschler/nodejs-inspector:5
+```
+
   ```bash
-  # BUILD The latest Node.js, now that io.js and Node.js are one again
+  # BUILD The stable LTS Node.js version 4.x
   docker build -t nodejs-inspector:4 ./docker-debugnode/nodejs-inspector/v4
 
   # OR pull the image which is automatically built and hosted at DockerHub
@@ -33,7 +51,7 @@ Debug local Node.js applications using different versions of node in a modulariz
   ```
 
   ```bash
-  # BUILD The stable Node.js version 0.12
+  # BUILD The stable LTS Node.js version 0.12
   docker build -t nodejs-inspector:0.12 ./docker-debugnode/nodejs-inspector/v0.12.LTS
 
   # OR pull the hosted image from DockerHub
@@ -43,7 +61,7 @@ Debug local Node.js applications using different versions of node in a modulariz
   ```
 
   ```bash
-  # BUILD The stable Node.js version 0.10
+  # BUILD The stable LTS Node.js version 0.10
   docker build -t nodejs-inspector:0.10 ./docker-debugnode/nodejs-inspector/v0.10.LTS
 
   # OR pull the hosted image from DockerHub
@@ -59,6 +77,12 @@ Debug local Node.js applications using different versions of node in a modulariz
     * If the image is built again, it is quick using the image cached layers
       * Only updates to package.json force ```npm install``` to run again
       * If an application file is change it is copied into the image next build without needing to wait for an npm install
+
+  Build the node-inspector base image created earlier from Node.js version 5.x
+  ```bash
+  docker build -t nodeapp-debug:4 \
+  --file=./docker-debugnode/debugapp/v5/Dockerfile .
+  ```
 
   Build the node-inspector base image created earlier from Node.js version 4.x
   ```bash
@@ -81,6 +105,9 @@ Debug local Node.js applications using different versions of node in a modulariz
 3. Next use the Run command to create a running container
 
   ```bash
+  # 5
+  docker run --name nodeapp-v4 -p 8080:8080 nodeapp-debug:5
+
   # 4
   docker run --name nodeapp-v4 -p 8080:8080 nodeapp-debug:4
 
@@ -108,7 +135,7 @@ Debug local Node.js applications using different versions of node in a modulariz
   docker-machine ip docker-01
   ```
 
-  Navigate to the docker-machine IP. Use chrome or other blink development tools browser, such as Webstorm: ```http://192.168.1.99.102:8080/?port=5858```
+  Navigate to the docker-machine IP. Use Chrome or other blink development tools browser, such as Webstorm: ```http://192.168.1.99.102:8080/?port=5858```
 
   #### Debug!
 
