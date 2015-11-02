@@ -35,7 +35,7 @@ docker build -t nodejs-inspector:5 ./docker-debugnode/nodejs-inspector/v5
 # OR pull the image which is automatically built and hosted at DockerHub
 #  Then rename to keep the image name same as if it was built locally (above)
 docker pull glenschler/nodejs-inspector:5
-docker tag glenschler/nodejs-inspector:4 nodejs-inspector:5
+docker tag glenschler/nodejs-inspector:5 nodejs-inspector:5
 docker rmi glenschler/nodejs-inspector:5
 ```
 
