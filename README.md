@@ -27,17 +27,17 @@ Debug local Node.js applications using different versions of node in a modulariz
 
 2. Now for each version of Node.js needed, build with the appropriate Dockerfile
 
-```bash
-# BUILD The Node.js with the latest features version 5.x
-# Until some dependencies are updated for node version 5.x node-inspector install requires the npm "--unsafe-perm" flag. This is set in this v5/Dockerfile
-docker build -t nodejs-inspector:5 ./docker-debugnode/nodejs-inspector/v5
+  ```bash
+  # BUILD The Node.js with the latest features version 5.x
+  # Until some dependencies are updated for node version 5.x node-inspector install requires the npm "--unsafe-perm" flag. This is set in this v5/Dockerfile
+  docker build -t nodejs-inspector:5 ./docker-debugnode/nodejs-inspector/v5
 
-# OR pull the image which is automatically built and hosted at DockerHub
-#  Then rename to keep the image name same as if it was built locally (above)
-docker pull glenschler/nodejs-inspector:5
-docker tag glenschler/nodejs-inspector:5 nodejs-inspector:5
-docker rmi glenschler/nodejs-inspector:5
-```
+  # OR pull the image which is automatically built and hosted at DockerHub
+  #  Then rename to keep the image name same as if it was built locally (above)
+  docker pull glenschler/nodejs-inspector:5
+  docker tag glenschler/nodejs-inspector:5 nodejs-inspector:5
+  docker rmi glenschler/nodejs-inspector:5
+  ```
 
   ```bash
   # BUILD The stable LTS Node.js version 4.x
@@ -70,7 +70,7 @@ docker rmi glenschler/nodejs-inspector:5
   docker rmi glenschler/nodejs-inspector:0.10
   ```
 
-2. Add node application files to a new image based off the above node-inspector image
+3. Add node application files to a new image based off the above node-inspector image
     * Must have a package.json
     * Docker file instructs NPM to install all modular dependencies
     * Next the local application files are added into the image
