@@ -1,7 +1,7 @@
-* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:5.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:5 'Get your own badge on imagelayers.io')  [nodejs-inspector/v5](./docker-debugnode/nodejs-inspector/v5)
-* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:4.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:4 'Get your own badge on imagelayers.io')  [nodejs-inspector/v4](./docker-debugnode/nodejs-inspector/v4)
-* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.12.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.12 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.12.LTS](./docker-debugnode/nodejs-inspector/v0.12.LTS)
-* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.10.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.10 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.10.LTS](./docker-debugnode/nodejs-inspector/v0.10.LTS)
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:5.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:5 'Get your own badge on imagelayers.io')  [nodejs-inspector/v5](./nodejs-inspector/v5/Dockerfile)
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:4.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:4 'Get your own badge on imagelayers.io')  [nodejs-inspector/v4](./nodejs-inspector/v4/Dockerfile)
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.12.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.12 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.12.LTS](./nodejs-inspector/v0.12.LTS/Dockerfile)
+* [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.10.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.10 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.10.LTS](./nodejs-inspector/v0.10.LTS/Dockerfile)
 
 ### Create a set of docker images built with node-inspector
 Debug local Node.js applications using different versions of node in a modularized docker environment. Build a base image of only the official docker hub Node.js release, plus an npm install of node-inspector. This allows new images to be built quickly which contain the application to be debugged without any change to the local environment.
