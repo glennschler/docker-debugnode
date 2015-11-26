@@ -3,7 +3,7 @@
 * [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.12.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.12 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.12.LTS](./nodejs-inspector/v0.12.LTS/Dockerfile)
 * [![](https://badge.imagelayers.io/glenschler/nodejs-inspector:0.10.svg)](https://imagelayers.io/?images=glenschler/nodejs-inspector:0.10 'Get your own badge on imagelayers.io')  [nodejs-inspector/v0.10.LTS](./nodejs-inspector/v0.10.LTS/Dockerfile)
 
-### Create a set of docker images built with node-inspector
+### Create a set of docker imagenodeapp-debug:4 built with node-inspector
 Debug local Node.js applications using different versions of node in a modularized docker environment. Build a base image of only the official docker hub Node.js release, plus an npm install of node-inspector. This allows new images to be built quickly which contain the application to be debugged without any change to the local environment.
 
 1. Build new base images (or pull from Dockerhub) of the official Node.js images plus node-inspector
@@ -80,7 +80,7 @@ Debug local Node.js applications using different versions of node in a modulariz
 
   Build the node-inspector base image created earlier from Node.js version 5.x
   ```bash
-  docker build -t nodeapp-debug:4 \
+  docker build -t nodeapp-debug:5 \
   --file=./docker-debugnode/debugapp/v5/Dockerfile .
   ```
 
