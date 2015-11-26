@@ -106,7 +106,7 @@ Debug local Node.js applications using different versions of node in a modulariz
 
   ```bash
   # 5
-  docker run --name nodeapp-v4 -p 8080:8080 nodeapp-debug:5
+  docker run --name nodeapp-v5 -p 8080:8080 nodeapp-debug:5
 
   # 4
   docker run --name nodeapp-v4 -p 8080:8080 nodeapp-debug:4
